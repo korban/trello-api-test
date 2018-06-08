@@ -9,34 +9,9 @@
 			"name": "Create a board",
 			"event": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "72b1c182-65f2-4fa4-ae11-0a7a2b723f32",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"",
-							"pm.test(\"Check board name\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"boardName\"));",
-							"});",
-							"",
-							"// intercept json response",
-							"var response = pm.response.json();",
-							"",
-							"// create in variable with id board",
-							"pm.environment.set(\"id_board\", response.id);",
-							""
-						]
-					}
-				},
-				{
 					"listen": "prerequest",
 					"script": {
-						"id": "be4d1483-a0f4-44bb-9f5b-5c5a8a9e1cec",
+						"id": "c2b85a7d-965a-41b6-b681-5d511916852c",
 						"type": "text/javascript",
 						"exec": [
 							"",
@@ -58,30 +33,32 @@
 							"",
 							"pm.environment.set(\"boardName\", boardName);",
 							"",
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e4253485-40bc-4b86-bf23-b3a7d6b4bd94",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
 							"",
 							"",
-							"/*another variant",
+							"pm.test(\"Check board name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(pm.environment.get(\"boardName\"));",
+							"});",
 							"",
+							"// intercept json response",
+							"var response = pm.response.json();",
 							"",
-							"// Use currentBoardNumber to store the board number",
-							"var currentBoardNumber = postman.getEnvironmentVariable(\"currentBoardNumber\");",
-							" ",
-							"// Check if currentBoardNumber is already defined",
-							"if (currentBoardNumber) {",
-							"    currentBoardNumber++; // increment",
-							"} else {",
-							"    currentBoardNumber = 1; // start from 1",
-							"}",
-							" ",
-							" ",
-							"var boardName = \"My board \" + currentBoardNumber;",
-							" ",
-							"// Set the boardName for the request",
-							"postman.setEnvironmentVariable(\"boardName\", boardName);",
-							" ",
-							"// Set the currentBoardNumber for future requests",
-							"postman.setEnvironmentVariable(\"currentBoardNumber\", currentBoardNumber);",
-							"*/"
+							"// create in variable with id board",
+							"pm.environment.set(\"id_board\", response.id);",
+							""
 						]
 					}
 				}
@@ -91,15 +68,14 @@
 				"header": [],
 				"body": {},
 				"url": {
-					"raw": "{{trello}}/1/boards/?key={{trelloKey}}&token={{trelloToken}}&name={{boardName}}&defaultLists=false&boardStars=mine&cardscards=none&prefs_background_url=https://images.unsplash.com/photo-1525707662507-835b59f8ebfd?key={{trelloKey}}&token={{trelloToken}}&name={{boardName}}&defaultLists=false&boardStars=mine&cardscards=none&prefs_background_url=https://images.unsplash.com/photo-1525707662507-835b59f8ebfd?ixlib=rb-0.3.5%26ixid=eyJhcHBfaWQiOjcwNjZ9%26s=d8d28052c8c7918c3e516007edaf403e%26w=2560%26h=2048%26q=90&ixlib=rb-0.3.5%26ixid=eyJhcHBfaWQiOjcwNjZ9%26s=d8d28052c8c7918c3e516007edaf403e%26w=2560%26h=2048%26q=90",
-					"protocol": "{{trello}}/1/boards/?key={{trelloKey}}&token={{trelloToken}}&name={{boardName}}&defaultLists=false&boardStars=mine&cardscards=none&prefs_background_url=https",
+					"raw": "{{trello}}/1/boards/?key={{trelloKey}}&token={{trelloToken}}&name={{boardName}}&boardStars=mine&cardscards=none&prefs_background_url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1525707662507-835b59f8ebfd%3Fixlib%3Drb-0.3.5%2526ixid%3DeyJhcHBfaWQiOjcwNjZ9%2526s%3Dd8d28052c8c7918c3e516007edaf403e%2526w%3D2560%2526h%3D2048%2526q%3D90",
 					"host": [
-						"images",
-						"unsplash",
-						"com"
+						"{{trello}}"
 					],
 					"path": [
-						"photo-1525707662507-835b59f8ebfd"
+						"1",
+						"boards",
+						""
 					],
 					"query": [
 						{
@@ -115,10 +91,6 @@
 							"value": "{{boardName}}"
 						},
 						{
-							"key": "defaultLists",
-							"value": "false"
-						},
-						{
 							"key": "boardStars",
 							"value": "mine"
 						},
@@ -128,11 +100,7 @@
 						},
 						{
 							"key": "prefs_background_url",
-							"value": "https://images.unsplash.com/photo-1525707662507-835b59f8ebfd?ixlib=rb-0.3.5%26ixid=eyJhcHBfaWQiOjcwNjZ9%26s=d8d28052c8c7918c3e516007edaf403e%26w=2560%26h=2048%26q=90"
-						},
-						{
-							"key": "ixlib",
-							"value": "rb-0.3.5%26ixid=eyJhcHBfaWQiOjcwNjZ9%26s=d8d28052c8c7918c3e516007edaf403e%26w=2560%26h=2048%26q=90"
+							"value": "https%3A%2F%2Fimages.unsplash.com%2Fphoto-1525707662507-835b59f8ebfd%3Fixlib%3Drb-0.3.5%2526ixid%3DeyJhcHBfaWQiOjcwNjZ9%2526s%3Dd8d28052c8c7918c3e516007edaf403e%2526w%3D2560%2526h%3D2048%2526q%3D90"
 						}
 					]
 				}
@@ -288,7 +256,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{trello}}/1/cards?idList={{TODO_list_id}}&name=Learn Postman&desc=Amazing performans with postman&key={{trelloKey}}&token={{trelloToken}}",
+					"raw": "{{trello}}/1/cards?idList={{TODO_list_id}}&name=Learn%20Postman&desc=Amazing%20performans%20with%20postman&key={{trelloKey}}&token={{trelloToken}}",
 					"host": [
 						"{{trello}}"
 					],
@@ -303,11 +271,11 @@
 						},
 						{
 							"key": "name",
-							"value": "Learn Postman"
+							"value": "Learn%20Postman"
 						},
 						{
 							"key": "desc",
-							"value": "Amazing performans with postman"
+							"value": "Amazing%20performans%20with%20postman"
 						},
 						{
 							"key": "key",
