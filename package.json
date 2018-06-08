@@ -1,0 +1,24 @@
+{
+  "name": "trello_test",
+  "version": "1.0.0",
+  "description": "Project for storing Postman tests",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test-trello-prod": "newman run tests/TRELLO.postman_collection.json -e env/Trello.postman_environment.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/korban/trello-api-test.git"
+  },
+  "author": "korban",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/korban/trello-api-test/issues"
+  },
+  "homepage": "https://github.com/korban/trello-api-test#readme",
+  "dependencies": {
+    "newman": "^3.9.4"
+  }
+}
