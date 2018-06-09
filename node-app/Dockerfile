@@ -11,8 +11,6 @@ RUN npm install
 # If you are building your code for production
 # RUN npm install --only=production
 
-RUN npm newman install --global
-
 
 # Bundle app source
 COPY .. .
